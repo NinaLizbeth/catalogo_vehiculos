@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Formulario de Vehículos</h1>
+
+<form method="post" class="formulario-vehiculo">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="id_marca">Marca:</label>
+        {{ form.marca }} <!-- Esto debería renderizar un <select> si lo has configurado correctamente en forms.py -->
+        {{ form.marca.errors }} <!-- Muestra los errores de validación -->
+    </div>
+
+    <div class="form-group">
+        <label for="id_modelo">Modelo:</label>
+        {{ form.modelo }} <!-- Esto debería renderizar un <input> -->
+        {{ form.modelo.errors }} <!-- Muestra los errores de validación -->
+    </div>
+
+    <div class="form-group">
+        <label for="id_serial_carroceria">Serial carrocería:</label>
+        {{ form.serial_carroceria }} <!-- Esto debería renderizar un <input> -->
+        {{ form.serial_carroceria.errors }} <!-- Muestra los errores de validación -->
+    </div>
+
+    <div class="form-group">
+        <label for="id_serial_motor">Serial motor:</label>
+        {{ form.serial_motor }} <!-- Esto debería renderizar un <input> -->
+        {{ form.serial_motor.errors }} <!-- Muestra los errores de validación -->
+    </div>
+
+    <div class="form-group">
+        <label for="id_categoria">Categoría:</label>
+        {{ form.categoria }} <!-- Esto debería renderizar un <select> si está configurado correctamente -->
+        {{ form.categoria.errors }} <!-- Muestra los errores de validación -->
+    </div>
+
+    <div class="form-group">
+        <label for="id_precio">Precio:</label>
+        {{ form.precio }} <!-- Esto debería renderizar un <input> -->
+        {{ form.precio.errors }} <!-- Muestra los errores de validación -->
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+
+{% endblock %}
