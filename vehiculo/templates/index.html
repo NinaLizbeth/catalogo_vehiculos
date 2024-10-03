@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h1>Catalogo de vehículos</h1>
-
-
-
-
+<div class="containerIndex">
+    <div class="contenedorIndex">
+        <h1 class="catalogoText">Bienvenido al catálogo de vehículos</h1>
+        <div class="contentWrapper">
+            <img class="imgIndex"
+                src="https://res.cloudinary.com/dt7h6qci4/image/upload/v1727742195/Captura_de_pantalla_2024-09-30_212254_tay53r.png"
+                alt="">
+            <a class="button" href="{% url 'login' %}">AGREGAR</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

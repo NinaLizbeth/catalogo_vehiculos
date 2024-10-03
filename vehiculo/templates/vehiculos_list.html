@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="containerVehiculosList">
+    <h1 class="mt-5">Lista de Vehículos</h1>
+
+
+    <div class containerTabla>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Serial Carrocería</th>
+                    <th>Serial Motor</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehiculo in vehiculos %}
+                <tr>
+                    <td>{{ vehiculo.marca }}</td>
+                    <td>{{ vehiculo.modelo }}</td>
+                    <td>{{ vehiculo.serial_carroceria }}</td>
+                    <td>{{ vehiculo.serial_motor }}</td>
+                    <td>{{ vehiculo.categoria }}</td>
+                    <td>${{ vehiculo.precio }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+
+<!-- Formulario de filtrado -->
+<!--<form method="GET" class="mt-3">
+        <div class="form-group">
+            <label for="precio_min">Precio Mínimo:</label>
+            <input type="number" name="precio_min" class="form-control" placeholder="Precio mínimo">
+        </div>
+        <div class="form-group">
+            <label for="precio_max">Precio Máximo:</label>
+            <input type="number" name="precio_max" class="form-control" placeholder="Precio máximo">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Filtrar</button>
+    </form>-->
+
+<!-- Formulario de filtrado -->
+<!--<form method="GET" class="mt-3">
+        <div class="form-group">
+            <label for="precio_min">Precio Mínimo:</label>
+            <input type="number" name="precio_min" class="form-control" placeholder="Precio mínimo">
+        </div>
+        <div class="form-group">
+            <label for="precio_max">Precio Máximo:</label>
+            <input type="number" name="precio_max" class="form-control" placeholder="Precio máximo">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Filtrar</button>
+    </form>-->

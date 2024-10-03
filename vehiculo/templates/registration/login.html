@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    {% load static %} <!-- Carga la etiqueta estática -->
+    {% load crispy_forms_tags %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Enlaza tu CSS aquí si es necesario -->
+</head>
+
+<body>
+    <div class="container">
+        <h2>Iniciar sesión</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }} <!-- Renderiza los campos del formulario -->
+            <button type="submit">Iniciar sesión</button>
+        </form>
+        <p><a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a></p>
+        <p><a href="{% url 'signup' %}">Crear una cuenta</a></p>
+        <!-- Cambia el nombre de la URL según tu configuración -->
+    </div>
+</body>
+
+</html>
