@@ -13,6 +13,8 @@ from django.contrib.auth.views import LoginView
 def index(request):
     return render(request, 'index.html', {})
 
+
+@login_required
 def add_vehiculos(request):
     if request.method == 'POST':
         form = VehiculoForm(request.POST)
@@ -69,5 +71,6 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 class CustomLoginView(LoginView):
-    template_name = 'registration/login.html'  # Asegúrate de que este es tu template de login
-    success_url = reverse_lazy('add_vehiculos')  # Redirige a 'add_vehiculos' después de iniciar sesión
+    template_name = 'registration/login.html'  # Plantilla de login
+    redirect_authenticated_user = True  # Redirigir si ya está autenticado
+    success_url = reverse_lazy('index')  # Redirigir al índice tras login

@@ -8,8 +8,10 @@ urlpatterns = [
     path('', index, name='index'),  # '' hace que la vista index sea la vista principal
     path('vehiculos/', vehiculos_list, name='vehiculos_list'),
     path('fadd_vehiculos/', add_vehiculos, name='add_vehiculos'),
+    
+    # Usa solo una vista para login
     path('accounts/login/', CustomLoginView.as_view(), name='login'),
-    path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('accounts/password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('accounts/password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),

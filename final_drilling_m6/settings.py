@@ -44,7 +44,8 @@ INSTALLED_APPS = [
 ]
 
 LOGIN_URL = 'login'  # Asegúrate de que este es el nombre de la URL de tu vista de inicio de sesión
-LOGIN_REDIRECT_URL = 'add_vehiculo'  # Redirige a la lista de vehículos después de iniciar sesión
+LOGIN_REDIRECT_URL = 'index'  # Redirige a la lista de vehículos después de iniciar sesión
+LOGOUT_REDIRECT_URL = 'index'
 
 
 
@@ -138,3 +139,5 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+

@@ -17,8 +17,14 @@
                     <a class="nav-link text-white" href="{% url 'vehiculos_list' %}">Listar</a>
                 </li>
             </ul>
-            <a class="btn btn-outline-light" href="{% url 'login' %}" role="button">Iniciar Sesión</a>
-            <!-- Botón de Iniciar Sesión -->
+            {% if user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-light">Cerrar Sesión</button>
+            </form>
+            {% else %}
+            <a class="btn btn-outline-light" href="{% url 'login' %}">Iniciar Sesión</a>
+            {% endif %}
         </div>
     </div>
 </nav>
