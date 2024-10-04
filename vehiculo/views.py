@@ -1,13 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from .models import Vehiculo
 from .forms import VehiculoForm
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from .models import Marca
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
+from .forms import RegistroUsuarioForm
 
 # Create your views here.
 def index(request):
@@ -19,8 +20,8 @@ def add_vehiculos(request):
     if request.method == 'POST':
         form = VehiculoForm(request.POST)
         if form.is_valid():
-            form.save()  # Guardamos el nuevo vehículo en la base de datos
-            return redirect('vehiculos_list')  # Redirigimos después de guardar
+            form.save()  # guardar el nuevo vehículo 
+            return redirect('vehiculos_list')  # redirijo a la tabla despues de guardar
     else:
         form = VehiculoForm()
 
@@ -29,11 +30,11 @@ def add_vehiculos(request):
 
 @login_required
 def vehiculos_list(request):
-    # Obtiene los parámetros de la consulta
+  
     precio_min = request.GET.get('precio_min', 0)  # Por defecto es 0 si no se proporciona
     precio_max = request.GET.get('precio_max', None)  # Si no se proporciona, queda como None
 
-    # Asegúrate de convertir los valores a enteros si son válidos
+
     try:
         precio_min = int(precio_min)
     except ValueError:
@@ -64,13 +65,64 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Iniciar sesión automáticamente después del registro
-            return redirect('index')  # Redirigir a la vista principal después del registro
+            login(request, user)  # inicio sesion automáticamente después del registro
+            return redirect('index')  # redirijo a la vista principal después del registro
     else:
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'  # Plantilla de login
-    redirect_authenticated_user = True  # Redirigir si ya está autenticado
-    success_url = reverse_lazy('index')  # Redirigir al índice tras login
+    redirect_authenticated_user = True  # redirige si ya estoy autenticada
+    success_url = reverse_lazy('index')  # redirige al índice tdespues del login
+
+#-----------------------------------Agregado--------------------------------------------------
+
+@login_required(login_url='login')
+@permission_required('vehiculo.view_vehiculo', raise_exception=True)
+def ver_vehiculo(request, pk):
+    vehiculo = get_object_or_404(Vehiculo, pk=pk)
+    return render(request, 'ver_vehiculo.html', {'vehiculo': vehiculo})
+
+
+@login_required(login_url='login')
+@permission_required('vehiculo.change_vehiculo', raise_exception=True)
+def editar_vehiculo(request, pk):
+    vehiculo = get_object_or_404(Vehiculo, pk=pk)
+    if request.method == 'POST':
+        form = VehiculoForm(request.POST, instance=vehiculo)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Vehículo actualizado exitosamente.')
+            return redirect('add_vehiculos')
+    else:
+        form = VehiculoForm(instance=vehiculo)
+    return render(request, 'add_vehiculo.html', {'form': form, 'editing': True})
+
+@login_required(login_url='login')
+@permission_required('vehiculo.delete_vehiculo', raise_exception=True)
+def eliminar_vehiculo(request, pk):
+    vehiculo = get_object_or_404(Vehiculo, pk=pk)
+    if request.method == 'POST':
+        vehiculo.delete()
+        messages.success(request, 'Vehículo eliminado exitosamente.')
+        return redirect('vehiculos_list')
+    return render(request, 'eliminar_vehiculo.html', {'vehiculo': vehiculo})
+
+
+
+
+def registrar_usuario(request):
+    if request.method == 'POST':
+        form = RegistroUsuarioForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Iniciar sesión automáticamente
+            messages.success(request, 'Usuario registrado exitosamente.')
+            return redirect('index')  # Redirigir a la página de inicio
+        else:
+            messages.error(request, 'Por favor corrige los errores del formulario.')
+    else:
+        form = RegistroUsuarioForm()
+
+    return render(request, 'registrar.html', {'form': form})

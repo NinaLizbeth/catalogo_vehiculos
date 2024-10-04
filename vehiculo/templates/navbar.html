@@ -18,12 +18,14 @@
                 </li>
             </ul>
             {% if user.is_authenticated %}
+            <span class="navbar-text me-2">Hola, {{ user.username }}!</span> <!-- Saludo personalizado -->
             <form action="{% url 'logout' %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-outline-light">Cerrar Sesión</button>
             </form>
             {% else %}
             <a class="btn btn-outline-light" href="{% url 'login' %}">Iniciar Sesión</a>
+            <a class="btn btn-outline-light ms-2" href="{% url 'registrar' %}">Registrarse</a>
             {% endif %}
         </div>
     </div>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalles de Vehículo{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Detalles del Vehículo</h2>
+    <p><strong>Marca:</strong> {{ vehiculo.marca }}</p>
+    <p><strong>Modelo:</strong> {{ vehiculo.modelo }}</p>
+    <p><strong>Serial Carrocería:</strong> {{ vehiculo.serial_carroceria }}</p>
+    <p><strong>Serial Motor:</strong> {{ vehiculo.serial_motor }}</p>
+    <p><strong>Categoría:</strong> {{ vehiculo.categoria }}</p>
+    <p><strong>Precio:</strong> {{ vehiculo.precio }}</p>
+    <p><strong>Fecha de creación:</strong> {{ vehiculo.fecha_creacion }}</p>
+    <p><strong>Última modificación:</strong> {{ vehiculo.fecha_modificacion }}</p>
+    <a href="{% url 'vehiculos_list' %}" class="btn btn-secondary">Volver al listado</a>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Eliminación{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">¿Estás seguro de que deseas eliminar {{ vehiculo.marca }} {{ vehiculo.modelo }}?</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Botón de eliminar con color rojo y espaciado -->
+        <button type="submit" class="btn btn-danger btn-block mb-3">Eliminar</button>
+
+        <!-- Botón de cancelar con color celeste y espaciado -->
+        <a href="{% url 'eliminar_vehiculo' vehiculo.pk %}" class="btn btn-info btn-block mb-3">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
