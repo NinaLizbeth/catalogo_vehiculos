@@ -12,44 +12,39 @@
     <style>
         body {
             height: 100vh;
-            /* Altura completa de la ventana */
+        
         }
 
         .form-container {
             width: 30%;
-            /* Ancho máximo del formulario (ajustado) */
             padding: 30px;
-            /* Espaciado interno (ajustado) */
             border-radius: 8px;
-            /* Esquinas redondeadas */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            /* Sombra (ajustada) */
             background-color: white;
-            /* Color de fondo */
+
         }
 
         .btn-black {
             background-color: black;
-            /* Color de fondo negro */
             color: white;
-            /* Color del texto blanco */
+        
         }
 
         .btn-black:hover {
             background-color: #333;
-            /* Color de fondo al pasar el ratón */
+           
         }
     </style>
 </head>
 
 <body class="d-flex align-items-center justify-content-center">
-    <div class="form-container"> <!-- Contenedor para el formulario -->
+    <div class="form-container">
         <h2 class="text-center">Iniciar sesión</h2>
         <form method="post">
             {% csrf_token %}
-            {{ form|crispy }} <!-- Usa crispy para renderizar el formulario -->
+            {{ form|crispy }}
             <button type="submit" class="btn btn-black w-100">Iniciar sesión</button>
-            <!-- Botón negro y ancho completo -->
+
         </form>
         <p class="text-center"><a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a></p>
         <p class="text-center"><a href="{% url 'signup' %}">Crear una cuenta</a></p>
