@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
+from django.contrib import messages as django_messages
 from django.contrib.auth.decorators import login_required, permission_required
 from .models import Vehiculo
 from .forms import VehiculoForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
-from .models import Marca
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import LoginView
-from .forms import RegistroUsuarioForm
+from .models import User
+from django.views import View
+from django.contrib import messages 
+
 
 # Create your views here.
 def index(request):
@@ -112,17 +114,36 @@ def eliminar_vehiculo(request, pk):
 
 
 
-def registrar_usuario(request):
-    if request.method == 'POST':
-        form = RegistroUsuarioForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)  # Iniciar sesión automáticamente
-            messages.success(request, 'Usuario registrado exitosamente.')
-            return redirect('index')  # Redirigir a la página de inicio
-        else:
-            messages.error(request, 'Por favor corrige los errores del formulario.')
-    else:
-        form = RegistroUsuarioForm()
+class RegisterView(View):
+    def get(self, request):
+        return render(request, 'registration/register.html')
 
-    return render(request, 'registrar.html', {'form': form})
+    def post(self, request):
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        
+        # Verificar si el correo electrónico ya está en uso
+        if User.objects.filter(email=email).exists():
+            django_messages.error(request, 'El correo electrónico ya está en uso')
+            return redirect(reverse('register'))
+        
+        # Verificar si las contraseñas coinciden
+        if password1 != password2:
+            django_messages.error(request, 'Passwords do not match')
+            return redirect(reverse('register'))
+
+        # Crear el usuario  
+        user = User.objects.create_user(username=first_name, email=email, password=password1, first_name=first_name, last_name=last_name)
+        user.is_active = True
+        user.save()
+
+        # Iniciar sesión automáticamente al registrarse
+        user = authenticate(username=user, password=password1)
+        if user is not None:
+            login(request, user)
+        django_messages.success(request, 'Usuario creado exitosamente')
+        return redirect('index')
+    

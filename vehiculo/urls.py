@@ -3,7 +3,10 @@ from .views import index
 from .views import vehiculos_list, add_vehiculos, signup , CustomLoginView, ver_vehiculo, eliminar_vehiculo, editar_vehiculo
 from django.contrib.auth import views as auth_views
 from .views import signup
-from . import views
+from .views import RegisterView  # Importa la vista
+
+
+
 
 urlpatterns = [
     path('', index, name='index'),  # '' hace que la vista index sea la vista principal
@@ -32,5 +35,5 @@ urlpatterns = [
 
     path('vehiculo/<int:pk>/eliminar/', eliminar_vehiculo, name='eliminar_vehiculo'), 
 
-    path('registrar/', views.registrar_usuario, name='registrar'),
+    path('register/', RegisterView.as_view(), name='register'),
 ]

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-dark text-white">
     <div class="container-fluid">
-        <a class="navbar-brand text-white" href="{% url 'index' %}">Vehículos</a>
+        <a id="navbarText" class="navbar-brand text-white" href="{% url 'index' %}">Vehículos</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,14 +18,15 @@
                 </li>
             </ul>
             {% if user.is_authenticated %}
-            <span class="navbar-text me-2">Hola, {{ user.username }}!</span> <!-- Saludo personalizado -->
+            <span class="navbar-text me-2" style="color: rgb(40, 180, 5); font-size: 24px;">Hola, {{ user.username }}!</span>
+            <!-- Saludo personalizado -->
             <form action="{% url 'logout' %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-outline-light">Cerrar Sesión</button>
             </form>
             {% else %}
             <a class="btn btn-outline-light" href="{% url 'login' %}">Iniciar Sesión</a>
-            <a class="btn btn-outline-light ms-2" href="{% url 'registrar' %}">Registrarse</a>
+            <a class="btn btn-outline-light ms-2" href="{% url 'register' %}">Registrarse</a>
             {% endif %}
         </div>
     </div>

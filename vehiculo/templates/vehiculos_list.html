@@ -3,35 +3,39 @@
 {% block title %}Listado de Vehículos{% endblock %}
 
 {% block content %}
-<div class="containerTabla">
-    <h2>Listado de Vehículos</h2>
-    <table class="table table-striped shadow-table">
+<div class="containerTabla" style="margin: 20px auto;"> <!-- Centramos el contenedor -->
+    <h2 class="text-center mb-4">Listado de Vehículos</h2>
+    <table class="table table-striped"
+        style="width: 95%; border: 2px solid rgba(0, 0, 0, 0.1); border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
         <thead>
             <tr>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Serial Carroceria</th>
-                <th>Serial Motor</th>
-                <th>Categoría</th>
-                <th>Precio</th>
-                <th>Condición de Precio</th>
-                <th>Acciones</th>
+                <th style="font-size: 1.2rem;">Marca</th>
+                <th style="font-size: 1.2rem;">Modelo</th>
+                <th style="font-size: 1.2rem;">Serial Carroceria</th>
+                <th style="font-size: 1.2rem;">Serial Motor</th>
+                <th style="font-size: 1.2rem;">Categoría</th>
+                <th style="font-size: 1.2rem;">Precio</th>
+                <th style="font-size: 1.2rem;">Condición de Precio</th>
+                <th style="font-size: 1.2rem;">Acciones</th>
             </tr>
         </thead>
         <tbody>
             {% for vehiculo in vehiculos %}
             <tr>
-                <td>{{ vehiculo.marca }}</td>
-                <td>{{ vehiculo.modelo }}</td>
-                <td>{{ vehiculo.serial_carroceria }}</td>
-                <td>{{ vehiculo.serial_motor }}</td>
-                <td>{{ vehiculo.categoria }}</td>
-                <td>{{ vehiculo.precio }}</td>
-                <td>{{ vehiculo.condicion_precio }}</td>
+                <td style="font-size: 1.2rem;">{{ vehiculo.marca }}</td>
+                <td style="font-size: 1.2rem;">{{ vehiculo.modelo }}</td>
+                <td style="font-size: 1.2rem;">{{ vehiculo.serial_carroceria }}</td>
+                <td style="font-size: 1.2rem;">{{ vehiculo.serial_motor }}</td>
+                <td style="font-size: 1.2rem;">{{ vehiculo.categoria }}</td>
+                <td style="font-size: 1.2rem;">{{ vehiculo.precio }}</td>
+                <td style="font-size: 1.2rem;">{{ vehiculo.condicion_precio }}</td>
                 <td>
-                    <a href="{% url 'ver_vehiculo' vehiculo.pk %}" class="btn-info btn-sm">Ver</a>
-                    <a href="{% url 'editar_vehiculo' vehiculo.pk %}" class="btn-warning btn-sm">Editar</a>
-                    <a href="{% url 'eliminar_vehiculo' vehiculo.pk %}" class="btn-danger btn-sm">Eliminar</a>
+                    <a href="{% url 'ver_vehiculo' vehiculo.pk %}" class="btn btn-secondary btn-sm"
+                        style="text-decoration: none;">Ver</a>
+                    <a href="{% url 'editar_vehiculo' vehiculo.pk %}" class="btn btn-success btn-sm"
+                        style="text-decoration: none;">Editar</a>
+                    <a href="{% url 'eliminar_vehiculo' vehiculo.pk %}" class="btn btn-danger btn-sm"
+                        style="text-decoration: none;">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}

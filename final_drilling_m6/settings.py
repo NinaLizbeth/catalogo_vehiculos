@@ -40,8 +40,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "vehiculo",
     'crispy_forms',
+    'crispy_bootstrap5',
   
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGIN_URL = 'login'  # Asegúrate de que este es el nombre de la URL de tu vista de inicio de sesión
 LOGIN_REDIRECT_URL = 'index'  # Redirige a la lista de vehículos después de iniciar sesión

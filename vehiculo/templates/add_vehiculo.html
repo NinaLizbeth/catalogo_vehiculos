@@ -1,51 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="tituloForm">Formulario de Vehículos</h1>
-<div class="principalContenedor">
-    <div class="container">
-
+<h1 class="tituloForm text-center">Formulario de Vehículos</h1>
+<div class="principalContenedor d-flex justify-content-center">
+    <div class="form-container"> <!-- Contenedor para el formulario -->
         <form method="post" class="formulario-vehiculo">
             {% csrf_token %}
 
-
-            <div class="form-group">
+            <div class="form-group mb-4"> <!-- Añadido mb-4 para margen inferior -->
                 <label for="id_marca">Marca:</label>
                 {{ form.marca }}
                 {{ form.marca.errors }} <!-- Muestra los errores de validación -->
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-4"> <!-- Añadido mb-4 para margen inferior -->
                 <label for="id_modelo">Modelo:</label>
-                {{ form.modelo }} <!-- Esto debería renderizar un <input> -->
+                {{ form.modelo }}
                 {{ form.modelo.errors }} <!-- Muestra los errores de validación -->
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-4"> <!-- Añadido mb-4 para margen inferior -->
                 <label for="id_serial_carroceria">Serial carrocería:</label>
-                {{ form.serial_carroceria }} <!-- Esto debería renderizar un <input> -->
+                {{ form.serial_carroceria }}
                 {{ form.serial_carroceria.errors }} <!-- Muestra los errores de validación -->
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-4"> <!-- Añadido mb-4 para margen inferior -->
                 <label for="id_serial_motor">Serial motor:</label>
-                {{ form.serial_motor }} <!-- Esto debería renderizar un <input> -->
+                {{ form.serial_motor }}
                 {{ form.serial_motor.errors }} <!-- Muestra los errores de validación -->
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-4"> <!-- Añadido mb-4 para margen inferior -->
                 <label for="id_categoria">Categoría:</label>
-                {{ form.categoria }} <!-- Esto debería renderizar un <select> si está configurado correctamente -->
+                {{ form.categoria }}
                 {{ form.categoria.errors }} <!-- Muestra los errores de validación -->
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-4"> <!-- Añadido mb-4 para margen inferior -->
                 <label for="id_precio">Precio:</label>
-                {{ form.precio }} <!-- Esto debería renderizar un <input> -->
+                {{ form.precio }}
                 {{ form.precio.errors }} <!-- Muestra los errores de validación -->
             </div>
 
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" class="btn btn-black w-100">Guardar</button> <!-- Botón negro y ancho completo -->
         </form>
 
         <!-- Opcional: Mensajes de éxito o error -->
@@ -58,5 +56,34 @@
         {% endif %}
     </div>
 </div>
+
+<style>
+    .form-container {
+
+        width: 35%;
+        /* Ancho máximo del formulario */
+        margin-top: 30px;
+        padding: 30px;
+        /* Espaciado interno */
+        border-radius: 8px;
+        /* Esquinas redondeadas */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        /* Sombra */
+        background-color: white;
+        /* Color de fondo */
+    }
+
+    .btn-black {
+        background-color: black;
+        /* Color de fondo negro */
+        color: white;
+        /* Color del texto blanco */
+    }
+
+    .btn-black:hover {
+        background-color: #333;
+        /* Color de fondo al pasar el ratón */
+    }
+</style>
 
 {% endblock %}
